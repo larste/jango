@@ -5,7 +5,11 @@ import java.util.List;
 
 import org.jibble.pircbot.PircBot;
 
-import com.github.larste.jango.plugin.*;
+import com.github.larste.jango.plugin.Baje;
+import com.github.larste.jango.plugin.EightBall;
+import com.github.larste.jango.plugin.Hello;
+import com.github.larste.jango.plugin.Reddit;
+import com.github.larste.jango.plugin.Time;
 
 public class PluginManager {
 
@@ -34,24 +38,21 @@ public class PluginManager {
 		}
 	}
 	
-	public void handleMessage(String target, String sender, String message) {
+	public void handleMessage(String target, String sender, String login,
+			String hostname, String message) throws Exception {
 		
 		for (Plugin plugin : this.plugins) {
 			
-			String result = plugin.handleMessage(sender, message);
-			
-			if (result != null) {
-				
-				this.bot.sendMessage(target, result);
-			}
+			plugin.handleMessage(target, sender, login, hostname, message);
 		}
 	}
 	
 	private void initPlugins() {
 		
-		this.registerPlugin(new Hello());
-		this.registerPlugin(new Time());
-		new EightBall(this);
-		this.registerPlugin(new Baje());
+		this.registerPlugin(new Baje(this.bot));
+		this.registerPlugin(new EightBall(this.bot));
+		this.registerPlugin(new Hello(this.bot));
+		this.registerPlugin(new Reddit(this.bot));
+		this.registerPlugin(new Time(this.bot));
 	}
 }

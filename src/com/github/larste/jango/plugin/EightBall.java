@@ -1,34 +1,33 @@
 package com.github.larste.jango.plugin;
 
-import com.github.larste.jango.Plugin;
-import com.github.larste.jango.PluginManager;
-
 import java.util.Random;
+
+import org.jibble.pircbot.PircBot;
+
+import com.github.larste.jango.Plugin;
 
 public class EightBall implements Plugin {
 
+	private PircBot bot;
 	public String[] answers = new String[20];
 	
-	public EightBall(PluginManager pm) {
-		pm.registerPlugin(this);
+	public EightBall(PircBot bot) {
+
+		this.bot = bot;
+		this.createAnswers();
 	}
 	
 	@Override
-	public String handleMessage(String sender, String message) {
+	public void handleMessage(String target, String sender, String login,
+			String hostname, String message) throws Exception {
+
+		if (message.startsWith("!8ball")) {
 		
-		String result = null;
-		
-		if (message.equalsIgnoreCase("!8ball")) {
-			
-			this.createAnswers();
-			
 			Random generator = new Random();
-			int random = generator.nextInt(20); 
-			
-			result = sender + ": " + this.answers[random];
+			int random = generator.nextInt(20);
+
+			this.bot.sendMessage(target, sender + ": " + this.answers[random]);
 		}
-		
-		return result;
 	}
 	
 	private void createAnswers() {

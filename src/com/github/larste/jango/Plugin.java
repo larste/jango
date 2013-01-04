@@ -2,5 +2,6 @@ package com.github.larste.jango;
 
 public interface Plugin {
 
-	public String handleMessage(String sender, String message);
+	public void handleMessage(String target, String sender, String login,
+			String hostname, String message) throws Exception;
 }

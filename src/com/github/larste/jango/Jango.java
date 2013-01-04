@@ -1,8 +1,6 @@
 package com.github.larste.jango;
 
-import java.io.IOException;
-
-import org.jibble.pircbot.*;
+import org.jibble.pircbot.PircBot;
 
 public class Jango extends PircBot {
 
@@ -29,6 +27,14 @@ public class Jango extends PircBot {
 	
 	public void onMessage(String channel, String sender, String login, String hostname, String message) {
 		
-		this.pluginManager.handleMessage(channel, sender, message);
+		try {
+
+			this.pluginManager.handleMessage(channel, sender, login, hostname,
+					message);
+
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+		}
 	}
 }

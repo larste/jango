@@ -1,19 +1,25 @@
 package com.github.larste.jango.plugin;
 
+import org.jibble.pircbot.PircBot;
+
 import com.github.larste.jango.Plugin;
 
 public class Baje implements Plugin {
 
+	private PircBot bot;
+
+	public Baje(PircBot bot) {
+
+		this.bot = bot;
+	}
+
 	@Override
-	public String handleMessage(String sender, String message) {
-		
-		String result = null;
+	public void handleMessage(String target, String sender, String login,
+			String hostname, String message) throws Exception {
 		
 		if (message.equalsIgnoreCase("!baje")) {
 			
-			result = sender + ": ØL OG SNAPS!";
+			this.bot.sendMessage(target, sender + ": ØL OG SNAPS!");
 		}
-		
-		return result;
 	}
 }
