@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings>
+	<general>
+		<name>Jango_Bott</name>
+		<network>irc.freenode.net</network>
+		<nickserv></nickserv>
+		<verbose>True</verbose>
+	</general>
+	
+	<channels>
+		<channel>#datamatiker</channel>
+	</channels>
+	
+	<plugins>
+		<plugin>Baje</plugin>
+		<plugin>EightBall</plugin>
+		<plugin>Time</plugin>
+	</plugins>
+</settings>
